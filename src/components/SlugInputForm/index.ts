@@ -1,0 +1,1 @@
+export { SlugInputForm } from './SlugInputForm';

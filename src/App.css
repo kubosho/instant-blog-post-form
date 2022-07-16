@@ -1,0 +1,100 @@
+main {
+  display: grid;
+  grid-template-areas:
+    'title slug'
+    'editor preview'
+    'draft submit';
+  grid-template-columns: 50vw 50vw;
+  grid-template-rows: auto 1fr auto;
+  gap: 12px 0;
+  height: 100vh;
+}
+
+main > section {
+  display: contents;
+}
+
+.input-separator {
+  display: block;
+  height: 1px;
+  background-color: var(--blue-600);
+  opacity: 0;
+  transform: scaleX(0) translateY(-2px);
+  transform-origin: 50%;
+  transition: all 0.2s linear;
+}
+
+.entry-title-area,
+.entry-slug-area {
+  display: flex;
+  flex-direction: column;
+  margin: 12px 12px 0;
+}
+
+.entry-title-area input,
+.entry-slug-area input {
+  height: calc(1rem * 2);
+  padding: 4px;
+  border: 0;
+  border-bottom: 1px solid var(--monotone-300);
+  background-color: inherit;
+  font-size: inherit;
+}
+.entry-title-area input:focus,
+.entry-slug-area input:focus {
+  outline: none;
+}
+.entry-title-area input:focus + .input-separator,
+.entry-slug-area input:focus + .input-separator {
+  opacity: 1;
+  transform: scaleX(1) translateY(-2px);
+}
+
+.entry-title-area {
+  grid-area: title;
+}
+
+.entry-slug-area {
+  grid-area: slug;
+}
+
+.entry-editor-area {
+  grid-area: editor;
+  margin-left: 12px;
+  overflow-y: auto;
+}
+
+.entry-preview-area {
+  grid-area: preview;
+  padding: 12px;
+  margin: 0 12px;
+  overflow-y: auto;
+}
+
+.entry-publication-section > * {
+  padding: 12px 0;
+  color: var(--monotone-100);
+  background-color: var(--blue-600);
+}
+
+.entry-draft-state-area {
+  display: flex;
+  align-items: center;
+  grid-area: draft;
+  gap: 8px;
+  justify-content: end;
+}
+
+.entry-submit-area {
+  grid-area: submit;
+  align-items: center;
+  padding-left: 12px;
+}
+
+.entry-submit-area button {
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 8px;
+  background-color: var(--yellow-200);
+  font-size: 1rem;
+}

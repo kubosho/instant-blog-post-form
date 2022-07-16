@@ -1,0 +1,15 @@
+.editor,
+.editor__content-editable {
+  height: 100%;
+}
+
+.editor {
+  border: solid 1px var(--monotone-300);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.editor-contents {
+  padding: 12px;
+  margin: 0;
+}
