@@ -1,0 +1,1 @@
+export { EntryPostConfirm } from './EntryPostConfirm';

@@ -1,0 +1,22 @@
+.entry-post-confirm {
+  position: relative;
+  z-index: 1;
+}
+
+.entry-post-confirm__panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  background-color: var(--monotone-800);
+}
+
+.entry-post-confirm__contents {
+  width: 100%;
+  max-width: 30rem;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: var(--monotone-100);
+}
