@@ -23,6 +23,26 @@ X_MICROCMS_HOST_NAME=example.microcms.io
 X_MICROCMS_API_PATH=api/v1/example
 ```
 
+## API Schema
+
+The format of microCMS API schema for this blog:
+
+```typescript
+export type ApiSchema = {
+  title: string;
+  body: string;
+  slug: string;
+  categories?: string[];
+  tags?: string[];
+  excerpt?: string;
+  heroImage?: {
+    url: string;
+    width: number;
+    height: number;
+  };
+};
+```
+
 ## Development
 
 Launch development server:
