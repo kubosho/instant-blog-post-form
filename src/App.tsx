@@ -6,6 +6,7 @@ import { Preview } from './components/Preview';
 import { TitleInputForm } from './components/TitleInputForm';
 import { SlugInputForm } from './components/SlugInputForm';
 import { EntryPostConfirm } from './components/EntryPostConfirm';
+import { SubmitButton } from './components/SubmitButton';
 import { activateI18n, retrieveTranslation, setLocale } from './locales/i18n';
 import { postEntry } from './microcms_api/post_entry';
 import { useEntryState } from './global_state/entry_state';
@@ -71,9 +72,7 @@ function App() {
           <DraftStateSwitch />
         </div>
         <div className="entry-submit-area">
-          <button type="button" onClick={onConfirmEntry}>
-            {retrieveTranslation('submit')}
-          </button>
+          <SubmitButton onSubmit={onConfirmEntry}>{retrieveTranslation('submit')}</SubmitButton>
         </div>
         <EntryPostConfirm isOpen={isDisplayToConfirm} onSubmit={onSubmitEntry} onClose={onClosePostConfirm} />
       </section>
