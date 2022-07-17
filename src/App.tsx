@@ -22,6 +22,11 @@ function App() {
   const slug = useEntryState((state) => state.slug);
   const rawContents = useEntryState((state) => state.rawContents);
   const isDraft = useEntryState((state) => state.isDraft);
+  const resetEntryState = useEntryState((state) => state.reset);
+
+  const setTitle = useEntryState((state) => state.setTitle);
+  const setSlug = useEntryState((state) => state.setSlug);
+  const setRawContents = useEntryState((state) => state.setRawContents);
 
   const setRendered = useRenderState((state) => state.setRendered);
   useEffect(() => {
@@ -38,14 +43,20 @@ function App() {
     setIsDisplayToConfirm(false);
   }, []);
 
-  const onSubmitEntry = useCallback(() => {
+  const onSubmitEntry = useCallback(async () => {
     const body = JSON.stringify({
       title,
       slug,
       body: rawContents,
     });
-    postEntry({ body, isDraft });
     setIsDisplayToConfirm(false);
+
+    try {
+      await postEntry({ body, isDraft });
+      resetEntryState();
+    } catch (error) {
+      // TODO: Error handling
+    }
   }, [title, slug, rawContents, isDraft]);
 
   return (

@@ -11,6 +11,7 @@ type State = {
   setRawContents: (contents: string) => void;
   setHtmlStringContents: (contents: string) => void;
   setDraft: () => void;
+  reset: () => void;
 };
 
 export const useEntryState = create<State>((set) => ({
@@ -24,4 +25,12 @@ export const useEntryState = create<State>((set) => ({
   setRawContents: (contents: string) => set(() => ({ rawContents: contents })),
   setHtmlStringContents: (contents: string) => set(() => ({ htmlStringContents: contents })),
   setDraft: () => set((state) => ({ isDraft: !state.isDraft })),
+  reset: () =>
+    set(() => ({
+      title: '',
+      slug: '',
+      rawContents: '',
+      htmlStringContents: '',
+      isDraft: true,
+    })),
 }));
