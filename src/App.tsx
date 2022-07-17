@@ -1,10 +1,11 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { DraftStateSwitch } from './components/DraftStateSwitch';
 import { Editor } from './components/Editor';
 import { Preview } from './components/Preview';
 import { TitleInputForm } from './components/TitleInputForm';
 import { SlugInputForm } from './components/SlugInputForm';
+import { EntryPostConfirm } from './components/EntryPostConfirm';
 import { activateI18n, retrieveTranslation, setLocale } from './locales/i18n';
 import { postEntry } from './microcms_api/post_entry';
 import { useEntryState } from './global_state/entry_state';
@@ -24,6 +25,16 @@ function App() {
   const setRendered = useRenderState((state) => state.setRendered);
   useEffect(() => {
     setRendered();
+  }, []);
+
+  const [isDisplayToConfirm, setIsDisplayToConfirm] = useState(false);
+
+  const onConfirmEntry = useCallback(() => {
+    setIsDisplayToConfirm(true);
+  }, []);
+
+  const onClosePostConfirm = useCallback(() => {
+    setIsDisplayToConfirm(false);
   }, []);
 
   const onSubmitEntry = useCallback(() => {
@@ -60,10 +71,11 @@ function App() {
           <DraftStateSwitch />
         </div>
         <div className="entry-submit-area">
-          <button type="button" onClick={onSubmitEntry}>
+          <button type="button" onClick={onConfirmEntry}>
             {retrieveTranslation('submit')}
           </button>
         </div>
+        <EntryPostConfirm isOpen={isDisplayToConfirm} onSubmit={onSubmitEntry} onClose={onClosePostConfirm} />
       </section>
     </main>
   );
