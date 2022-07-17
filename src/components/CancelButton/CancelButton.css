@@ -1,0 +1,13 @@
+.cancel-button {
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 8px;
+  color: var(--monotone-100);
+  background-color: var(--monotone-700);
+  font-size: 1rem;
+}
+.cancel-button:hover,
+.cancel-button:focus {
+  cursor: pointer;
+  background-color: var(--monotone-500);
+}
