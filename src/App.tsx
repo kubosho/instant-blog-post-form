@@ -45,6 +45,7 @@ function App() {
       body: rawContents,
     });
     postEntry({ body, isDraft });
+    setIsDisplayToConfirm(false);
   }, [title, slug, rawContents, isDraft]);
 
   return (
