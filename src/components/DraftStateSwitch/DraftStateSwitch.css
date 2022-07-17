@@ -9,7 +9,7 @@
   border-radius: 8px;
 }
 .entry-publication-state-switch--on {
-  background-color: var(--yellow-200);
+  background-color: var(--blue-600);
 }
 .entry-publication-state-switch--off {
   background-color: var(--monotone-300);

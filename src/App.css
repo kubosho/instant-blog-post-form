@@ -73,8 +73,7 @@ main > section {
 
 .entry-publication-section > * {
   padding: 12px 0;
-  color: var(--monotone-100);
-  background-color: var(--blue-600);
+  background-color: var(--beige-200);
 }
 
 .entry-draft-state-area {
@@ -95,6 +94,7 @@ main > section {
   padding: 8px 12px;
   border: 0;
   border-radius: 8px;
-  background-color: var(--yellow-200);
+  color: var(--monotone-100);
+  background-color: var(--blue-600);
   font-size: 1rem;
 }
