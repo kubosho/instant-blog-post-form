@@ -4,6 +4,7 @@ import { Dialog } from '@headlessui/react';
 import { retrieveTranslation } from '../../locales/i18n';
 
 import './EntryPostConfirm.css';
+import { SubmitButton } from '../SubmitButton';
 
 type Props = {
   isOpen: boolean;
@@ -18,7 +19,7 @@ export function EntryPostConfirm({ isOpen, onSubmit, onClose }: Props) {
         <Dialog.Panel className="entry-post-confirm__contents">
           <Dialog.Title>{retrieveTranslation('confirm.title')}</Dialog.Title>
           <Dialog.Description>{retrieveTranslation('confirm.description')}</Dialog.Description>
-          <button onClick={onSubmit}>{retrieveTranslation('submit')}</button>
+          <SubmitButton onSubmit={onSubmit}>{retrieveTranslation('submit')}</SubmitButton>
           <button onClick={onClose}>{retrieveTranslation('cancel')}</button>
         </Dialog.Panel>
       </div>
