@@ -24,10 +24,6 @@ function App() {
   const isDraft = useEntryState((state) => state.isDraft);
   const resetEntryState = useEntryState((state) => state.reset);
 
-  const setTitle = useEntryState((state) => state.setTitle);
-  const setSlug = useEntryState((state) => state.setSlug);
-  const setRawContents = useEntryState((state) => state.setRawContents);
-
   const setRendered = useRenderState((state) => state.setRendered);
   useEffect(() => {
     setRendered();
