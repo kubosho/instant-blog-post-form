@@ -5,6 +5,7 @@ import { retrieveTranslation } from '../../locales/i18n';
 
 import './EntryPostConfirm.css';
 import { SubmitButton } from '../SubmitButton';
+import { CancelButton } from '../CancelButton';
 
 type Props = {
   isOpen: boolean;
@@ -20,7 +21,7 @@ export function EntryPostConfirm({ isOpen, onSubmit, onClose }: Props) {
           <Dialog.Title>{retrieveTranslation('confirm.title')}</Dialog.Title>
           <Dialog.Description>{retrieveTranslation('confirm.description')}</Dialog.Description>
           <SubmitButton onSubmit={onSubmit}>{retrieveTranslation('submit')}</SubmitButton>
-          <button onClick={onClose}>{retrieveTranslation('cancel')}</button>
+          <CancelButton onSubmit={onClose}>{retrieveTranslation('cancel')}</CancelButton>
         </Dialog.Panel>
       </div>
     </Dialog>,
