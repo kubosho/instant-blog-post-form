@@ -20,3 +20,16 @@
   border-radius: 8px;
   background-color: var(--monotone-100);
 }
+
+.entry-post-confirm__actions {
+  display: flex;
+  justify-content: center;
+}
+
+.entry-post-confirm__actions > * {
+  margin-left: 12px;
+}
+
+.entry-post-confirm__actions:first-child {
+  margin-left: 0;
+}
