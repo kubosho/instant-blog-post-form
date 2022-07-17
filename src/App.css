@@ -14,6 +14,35 @@ main > section {
   display: contents;
 }
 
+.entry-metadata-section > * {
+  display: flex;
+  flex-direction: column;
+  padding-top: 12px;
+}
+.entry-metadata-section > *:first-child {
+  padding-left: 12px;
+}
+.entry-metadata-section > *:last-child {
+  padding-right: 12px;
+  margin-left: 12px;
+}
+
+.entry-metadata-section > * input {
+  height: calc(1rem * 2);
+  padding: 4px;
+  border: 0;
+  border-bottom: 1px solid var(--monotone-300);
+  background-color: inherit;
+  font-size: inherit;
+}
+.entry-metadata-section > * input:focus {
+  outline: none;
+}
+.entry-metadata-section > * input:focus + .input-separator {
+  opacity: 1;
+  transform: scaleX(1) translateY(-2px);
+}
+
 .input-separator {
   display: block;
   height: 1px;
@@ -22,32 +51,6 @@ main > section {
   transform: scaleX(0) translateY(-2px);
   transform-origin: 50%;
   transition: all 0.2s linear;
-}
-
-.entry-title-area,
-.entry-slug-area {
-  display: flex;
-  flex-direction: column;
-  margin: 12px 12px 0;
-}
-
-.entry-title-area input,
-.entry-slug-area input {
-  height: calc(1rem * 2);
-  padding: 4px;
-  border: 0;
-  border-bottom: 1px solid var(--monotone-300);
-  background-color: inherit;
-  font-size: inherit;
-}
-.entry-title-area input:focus,
-.entry-slug-area input:focus {
-  outline: none;
-}
-.entry-title-area input:focus + .input-separator,
-.entry-slug-area input:focus + .input-separator {
-  opacity: 1;
-  transform: scaleX(1) translateY(-2px);
 }
 
 .entry-title-area {
