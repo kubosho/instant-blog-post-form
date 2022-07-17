@@ -2,10 +2,10 @@ import { createPortal } from 'react-dom';
 import { Dialog } from '@headlessui/react';
 
 import { retrieveTranslation } from '../../locales/i18n';
-
-import './EntryPostConfirm.css';
 import { SubmitButton } from '../SubmitButton';
 import { CancelButton } from '../CancelButton';
+
+import './EntryPostConfirm.css';
 
 type Props = {
   isOpen: boolean;
