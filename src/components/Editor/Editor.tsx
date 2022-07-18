@@ -1,47 +1,49 @@
 import { useCallback, useRef } from 'react';
-import { $getRoot, EditorState } from 'lexical';
+import { $createParagraphNode, $getRoot, EditorState } from 'lexical';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { PlainTextPlugin } from '@lexical/react/LexicalPlainTextPlugin';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { AutoScrollPlugin } from '@lexical/react/LexicalAutoScrollPlugin';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
+import { ClearEditorPlugin } from '@lexical/react/LexicalClearEditorPlugin';
 
-import { convertMarkdownToHtmlString } from '../../markdown/markdown_to_html_converter';
 import { useEntryState } from '../../global_state/entry_state';
 
 import { RestoreFromLocalStoragePlugin } from './plugins/LexicalRestoreFromLocalstorage';
+import { LexicalComposerContextSetPlugin } from './plugins/LexicalComposerContextSetPlugin';
 
 import './Editor.css';
 
-export const editorTheme = {
+const editorTheme = {
   paragraph: 'editor-contents',
 };
 
-function onError(error: Error): void {
+function onEditorError(error: Error): void {
   console.error(error);
 }
 
-export function Editor() {
+export function Editor(): JSX.Element {
   const editorWithScrollRef = useRef(null);
-  const setRawContents = useEntryState((state) => state.setRawContents);
-  const setHtmlString = useEntryState((state) => state.setHtmlStringContents);
+  const setContents = useEntryState((state) => state.setContents);
+
+  const setEditorState = useEntryState((state) => state.setEditorState);
 
   const onChange = useCallback((editorState: EditorState) => {
-    editorState.read(async () => {
+    editorState.read(() => {
       const root = $getRoot();
-      const text = root.getTextContent();
-      const htmlString = await convertMarkdownToHtmlString(text);
+      const contents = root.getTextContent();
+      const serializedEditorState = editorState.toJSON();
 
-      setRawContents(text);
-      setHtmlString(htmlString);
+      setContents(contents);
+      setEditorState(serializedEditorState);
     });
   }, []);
 
   const initialConfig = {
-    namespace: 'MyEditor',
+    namespace: 'InstantBlogPostForm',
     theme: editorTheme,
-    onError,
+    onError: onEditorError,
   };
 
   return (
@@ -50,8 +52,10 @@ export function Editor() {
         <PlainTextPlugin contentEditable={<ContentEditable className="editor__content-editable" />} placeholder="" />
         <OnChangePlugin onChange={onChange} />
         <AutoScrollPlugin scrollRef={editorWithScrollRef} />
-        <RestoreFromLocalStoragePlugin />
         <HistoryPlugin />
+        <ClearEditorPlugin />
+        <LexicalComposerContextSetPlugin />
+        <RestoreFromLocalStoragePlugin />
       </LexicalComposer>
     </div>
   );
