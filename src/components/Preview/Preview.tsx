@@ -10,10 +10,9 @@ export const Preview = () => {
   const [htmlString, setHtmlString] = useState('');
 
   useEffect(() => {
-    (async () => {
-      const htmlString = await convertMarkdownToHtmlString(contents);
+    convertMarkdownToHtmlString(contents).then((htmlString) => {
       setHtmlString(htmlString);
-    })();
+    });
   }, [contents]);
 
   return (
