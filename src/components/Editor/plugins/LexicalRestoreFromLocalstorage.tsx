@@ -1,37 +1,25 @@
-import { useCallback, useEffect } from 'react';
-import { useLocalStorage } from 'react-use';
-import { EditorState } from 'lexical';
-import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
+import { useEffect } from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 
-import { useRenderState } from '../../../global_state/render_state';
+import { useRestoreState } from '../../../global_state/restore_state';
+import { useEntryStateStorage } from '../../../hooks/use_entry_state_storage';
 
-export function RestoreFromLocalStoragePlugin() {
-  const isFirstRender = useRenderState((state) => state.isFirstRender);
+export function RestoreFromLocalStoragePlugin(): null {
+  const isRestored = useRestoreState((state) => state.isRestored);
 
   const [editor] = useLexicalComposerContext();
-  const [serializedEditorState, setSerializedEditorState] = useLocalStorage<string | null>(
-    'instant-blog-post-contents',
-    null,
-  );
+  const { entryState } = useEntryStateStorage();
 
   useEffect(() => {
-    if (!isFirstRender) {
+    if (isRestored) {
       return;
     }
 
-    if (serializedEditorState) {
-      const initialEditorState = editor.parseEditorState(serializedEditorState);
+    if (entryState && entryState.editorState) {
+      const initialEditorState = editor.parseEditorState(entryState.editorState);
       editor.setEditorState(initialEditorState);
     }
-  }, [isFirstRender, serializedEditorState, editor]);
+  }, [isRestored, entryState, editor]);
 
-  const onChange = useCallback(
-    (editorState: EditorState) => {
-      setSerializedEditorState(JSON.stringify(editorState.toJSON()));
-    },
-    [setSerializedEditorState],
-  );
-
-  return <OnChangePlugin onChange={onChange} />;
+  return null;
 }
