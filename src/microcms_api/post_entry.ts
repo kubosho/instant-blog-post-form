@@ -5,6 +5,8 @@ type Param = {
   isDraft: boolean;
 };
 
+const MICROCMS_HOST_NAME = `${import.meta.env.X_MICROCMS_API_SUB_DOMAIN}.microcms.io` as const;
+
 export async function postEntry({ body, isDraft }: Param) {
   const urlSearchParams = new URLSearchParams();
   let urlQuery = '';
@@ -19,7 +21,7 @@ export async function postEntry({ body, isDraft }: Param) {
   }
 
   const request = getRequestObject({
-    path: `https://${import.meta.env.X_MICROCMS_HOST_NAME}/${import.meta.env.X_MICROCMS_API_PATH}${urlQuery}`,
+    path: `https://${MICROCMS_HOST_NAME}/${import.meta.env.X_MICROCMS_API_PATH}${urlQuery}`,
     method: 'POST',
     body,
   });
