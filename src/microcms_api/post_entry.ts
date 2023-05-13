@@ -6,6 +6,7 @@ type Param = {
 };
 
 const MICROCMS_HOST_NAME = `${import.meta.env.X_MICROCMS_API_SUB_DOMAIN}.microcms.io` as const;
+const MICROCMS_API_PATH = `/api/v1/${import.meta.env.X_MICROCMS_API_NAME}` as const;
 
 export async function postEntry({ body, isDraft }: Param) {
   const urlSearchParams = new URLSearchParams();
@@ -21,7 +22,7 @@ export async function postEntry({ body, isDraft }: Param) {
   }
 
   const request = getRequestObject({
-    path: `https://${MICROCMS_HOST_NAME}/${import.meta.env.X_MICROCMS_API_PATH}${urlQuery}`,
+    path: `https://${MICROCMS_HOST_NAME}${MICROCMS_API_PATH}${urlQuery}`,
     method: 'POST',
     body,
   });
